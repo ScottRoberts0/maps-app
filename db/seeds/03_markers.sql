@@ -1,0 +1,3 @@
+-- Markers table seeds here (Example)
+INSERT INTO markers (lat, long, title, description, img, map_id) VALUES (51.037999, -114.093964, 'McDonalds', 'Im loving it!', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwilxPOi_ZnkAhWPtZ4KHT62BRYQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.rd.com%2Ffood%2Ffun%2Fmcdonalds-gold-card%2F&psig=AOvVaw3zdEvsFIsatD6Avp7Zvyo4&ust=1566683571993500', 1);
+INSERT INTO markers (lat, long, title, description, img, map_id) VALUES (51.033705, -114.071316, 'Anejo', 'This is a restaurant', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwilxPOi_ZnkAhWPtZ4KHT62BRYQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.rd.com%2Ffood%2Ffun%2Fmcdonalds-gold-card%2F&psig=AOvVaw3zdEvsFIsatD6Avp7Zvyo4&ust=1566683571993500', 1);
