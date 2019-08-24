@@ -14,28 +14,33 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/maps"
-  }).done((maps) => {
-    console.log(maps);
+  }).done((mapsList) => {
 
-    for(map of maps.maps) {
-      //let str = `${map.id}, ${map.lat}, ${map.long}, ${map.city}, ${map.user_id}`;
-      //$("<div>").text(str).appendTo($("body"));
-      $("<div>").attr('id', 'map'+map.id).css({"width": "900px", "height": "580px"}).appendTo($("body"));
+    for (map of mapsList.maps) {
+      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("body"));
 
-      var mapOptions = {
+      let mapOptions = {
         center: [map.lat, map.long],
         zoom: 10
-     }
+      }
 
-     // Creating a map object
-     var map = new L.map('map'+map.id, mapOptions);
+      // Creating a map object
+      let newMap = new L.map('map' + map.id, mapOptions);
 
-     // Creating a Layer object
-     var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+      // Creating a Layer object
+      let layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
 
-     // Adding layer to the map
-     map.addLayer(layer);
+      // Adding layer to the map
+      newMap.addLayer(layer);
 
+      //Adds markers to our map
+      for (let marker of map.markers) {
+        // Creating a marker
+        let newMarker = L.marker([marker.lat, marker.long]);
+        // Adding marker to the map
+        newMarker.addTo(newMap);
+
+      }
     }
   });;
 });

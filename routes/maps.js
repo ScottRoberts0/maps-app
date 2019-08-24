@@ -8,12 +8,28 @@
 const express = require('express');
 const router  = express.Router();
 
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM maps;`)
       .then(data => {
         const maps = data.rows;
-        res.json({ maps });
+        db.query(`SELECT * FROM markers;`)
+        .then(data => {
+          const markers = data.rows;
+
+          for(let map of maps){
+            map.markers = [];
+            for(let marker of markers){
+              if(marker.map_id === map.id){
+                map.markers.push(marker);
+              }
+             }
+          }
+
+
+          res.json({maps});
+        })
       })
       .catch(err => {
         res
