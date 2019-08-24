@@ -21,7 +21,7 @@ $(() => {
 
       let mapOptions = {
         center: [map.lat, map.long],
-        zoom: 10
+        zoom: 11
       }
 
       // Creating a map object
@@ -35,11 +35,24 @@ $(() => {
 
       //Adds markers to our map
       for (let marker of map.markers) {
+        let markerOptions = {
+          title: marker.title,
+          clickable: true,
+       }
+
         // Creating a marker
-        let newMarker = L.marker([marker.lat, marker.long]);
+        let newMarker = L.marker([marker.lat, marker.long], markerOptions);
         // Adding marker to the map
         newMarker.addTo(newMap);
 
+        // Adding popup to the marker
+        newMarker.bindPopup(`
+        <h1>${marker.title}</h1>
+        <p>${marker.description}</p>
+        <img src=${marker.img} style="width: 50px; height: 50px;">
+
+        `);
+        newMarker.addTo(newMap); // Adding marker to the map
       }
     }
   });;
