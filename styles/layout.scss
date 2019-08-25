@@ -2,8 +2,16 @@
 
 body {
   background-color: #EEE;
-
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  article {
+    margin-left: 30%;
+  }
   h1 {
-    color: #244751;
+    margin-left: 74%;
+  }
+  div {
+    width: 20%;
   }
 }
