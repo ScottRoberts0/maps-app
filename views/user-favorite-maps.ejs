@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Favorite Maps</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -27,23 +27,10 @@
     <% include ./partials/_header %>
   </header>
   <div class=flex>
-    <div>
-      <a class="dropdown-item" href="/singleUserMapsRoute">
-        <h4>My Maps</h4>
-      </a>
-      <a class="dropdown-item" href="/newMapeRoute">
-        <h4>Create Map</h4>
-      </a>
-      <a class="dropdown-item" href="/userFavoriteMapsRoute">
-        <h4>Favorite Maps</h4>
-      </a>
-      <div class="dropdown-divider"></div>
-    </div>
-    <!--<article id = map-body>
-  </article> this it the map layout-->
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <h4>Favorite Maps</h4>
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div id="maps-picture" class="carousel-item active">
           <img
             src="https://media.blogto.com/articles/20171013-aloette-08.jpg?w=720&cmd=resize_then_crop&height=480&quality=70"
             class="d-block w-100" alt="...">

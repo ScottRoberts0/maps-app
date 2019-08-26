@@ -1,0 +1,22 @@
+<nav>
+    <!-- <a class="navbar-brand" href="/"> -->
+    <a href="/">
+      <h2><i class="fas fa-map-marked-alt"></i> MaPs</h2>
+    </a>
+
+    <div class=credentials>
+      <% if ("user") { %>
+      <form class="form-inline" action="/logout" method="POST">
+        <h5><%= ("hereDisplayUserEmail") %> </h5>
+        <button type="submit" class="btn btn-primary">Logout</button>
+      </form>
+      <% } else { %>
+        <button type="submit" class="btn btn-primary">Register
+          <a class="nav-item nav-link" href="/registerRoute"></a>
+        </button>
+        <button type="submit" class="btn btn-primary">Sign In
+            <a class="nav-item nav-link" href="/login"></a>
+          </button>
+      <% } %>
+    </div>
+  </nav>
