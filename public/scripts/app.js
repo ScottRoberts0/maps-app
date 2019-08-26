@@ -1,15 +1,3 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     console.log(users);
-//     for(user of users.users) {
-//       $("<div>").text(user.email).appendTo($("body"));
-//     }
-//   });;
-// });
-
 $(() => {
   $.ajax({
     method: "GET",
@@ -17,7 +5,7 @@ $(() => {
   }).done((mapsList) => {
 
     for (map of mapsList.maps) {
-      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("article"));
+      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("#map-body"));
 
       let mapOptions = {
         center: [map.lat, map.long],
