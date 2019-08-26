@@ -6,5 +6,7 @@ CREATE TABLE maps (
   lat DECIMAL(10,6) NOT NULL,
   long DECIMAL(10,6) NOT NULL,
   city VARCHAR(255),
+  title VARCHAR(255),
+  img VARCHAR(255),
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );

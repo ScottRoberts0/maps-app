@@ -39,9 +39,7 @@ const usersRoutesAPI = require("./routes/usersAPI");
 const mapsRoutesAPI = require("./routes/mapsAPI");
 
 // Mount all resource routes
-app.get("/maps", (req, res) => {
-  res.render("maps");
-});
+
 
 app.get("/maps/:id", (req, res) => {
   templateVars = {
@@ -50,11 +48,57 @@ app.get("/maps/:id", (req, res) => {
   res.render("maps_show", templateVars);
 });
 
-app.get("/maps/", (req, res) => {
-  templateVars = {
-    id: req.params.id
-  }
-  res.render("maps", templateVars);
+
+
+
+const getAllMaps = function (){
+  let maps = [];
+  db.query(`SELECT * FROM maps;`)
+  .then(data => {
+    maps = data.rows;
+    db.query(`SELECT * FROM markers;`)
+    .then(data => {
+      const markers = data.rows;
+
+      for(let map of maps){
+        map.markers = [];
+        for(let marker of markers){
+          if(marker.map_id === map.id){
+            map.markers.push(marker);
+          }
+         }
+      }
+    })
+  })
+
+}
+
+
+app.get("/maps", (req, res) => {
+  db.query(`SELECT * FROM maps;`)
+  .then(data => {
+    maps = data.rows;
+    db.query(`SELECT * FROM markers;`)
+    .then(data => {
+      const markers = data.rows;
+
+      for(let map of maps){
+        map.markers = [];
+        for(let marker of markers){
+          if(marker.map_id === map.id){
+            map.markers.push(marker);
+          }
+         }
+
+      }
+
+      templateVars = {
+        maps: maps
+      }
+      res.render("maps", templateVars);
+    })
+  })
+
 });
 
 
@@ -66,7 +110,30 @@ app.use("/api/users", usersRoutesAPI(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("maps_show");
+  db.query(`SELECT * FROM maps LIMIT 10;`)
+  .then(data => {
+    maps = data.rows;
+    db.query(`SELECT * FROM markers;`)
+    .then(data => {
+      const markers = data.rows;
+
+      for(let map of maps){
+        map.markers = [];
+        for(let marker of markers){
+          if(marker.map_id === map.id){
+            map.markers.push(marker);
+          }
+         }
+
+      }
+
+      templateVars = {
+        maps: maps
+      }
+      res.render("index", templateVars);
+    })
+  })
+
 });
 
 app.listen(PORT, () => {
