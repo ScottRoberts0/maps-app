@@ -39,7 +39,9 @@ const usersRoutesAPI = require("./routes/usersAPI");
 const mapsRoutesAPI = require("./routes/mapsAPI");
 
 // Mount all resource routes
-
+app.get("/maps/create", (req, res) => {
+  res.render("map_create");
+})
 
 app.get("/maps/:id", (req, res) => {
   templateVars = {
@@ -47,7 +49,6 @@ app.get("/maps/:id", (req, res) => {
   }
   res.render("maps_show", templateVars);
 });
-
 
 
 app.get("/maps", (req, res) => {
@@ -109,8 +110,60 @@ app.get("/", (req, res) => {
       res.render("user-maps", templateVars);
     })
   })
-
 });
+
+const opencage = require('opencage-api-client');
+
+
+app.post("/maps/create", (req, res) => {
+  const title = req.body.title;
+  const city = req.body.city;
+  const img = req.body.img;
+  opencage.geocode({q: city}).then(data => {
+   // console.log(JSON.stringify(data));
+    if (data.status.code == 200) {
+      if (data.results.length > 0) {
+        var place = data.results[0];
+
+
+       const lat = place.geometry.lat;
+       const long = place.geometry.lng;
+      // console.log(lat);
+      // console.log(long);
+      // console.log(city)
+      // console.log(title)
+      // console.log(img)
+      //  db.query(`
+      //  INSERT INTO maps (lat, long, city, title, img, user_id)
+      //  VALUES (${lat}, ${long}, ${city}, ${title}, ${img}, 1)
+      //  RETURNING *;`)
+        db.query(`INSERT INTO maps (lat, long, city, title, img, user_id)
+        VALUES (${lat}, ${long}, '${city}', '${title}', '${img}', 1)
+        RETURNING *;`)
+       .then(data => {
+        const id = data.rows[0].id;
+        const redirectUrl =  "/maps/" + id;
+        res.redirect(redirectUrl);
+       })
+
+      }
+    } else if (data.status.code == 402) {
+      console.log('hit free-trial daily limit');
+      console.log('become a customer: https://opencagedata.com/pricing');
+
+    } else {
+      // other possible response codes:
+      // https://opencagedata.com/api#codes
+      console.log('error', data.status.message);
+    }
+  })
+  .catch(error => {
+    console.log('error', error.message);
+  })
+
+
+})
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

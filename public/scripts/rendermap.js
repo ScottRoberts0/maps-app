@@ -8,8 +8,9 @@ $(() => {
   }).done((mapsList) => {
 
     for (map of mapsList.maps) {
-      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($(".map_body"));
-
+      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("body"));
+      $("<ul>").appendTo($("body"));
+      $("<ul>").append(`<li>`)
       let mapOptions = {
         center: [map.lat, map.long],
         zoom: 11
@@ -41,9 +42,12 @@ $(() => {
         <h1>${marker.title}</h1>
         <p>${marker.description}</p>
         <img src=${marker.img} style="width: 50px; height: 50px;">
-
         `);
+
         newMarker.addTo(newMap); // Adding marker to the map
+
+        $("ul").append(`<li>${marker.title}</li>`)
+
       }
     }
   });;
