@@ -10,6 +10,38 @@ const router  = express.Router();
 
 
 module.exports = (db) => {
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    db.query(`SELECT * FROM maps WHERE id = $1;`, [id])
+      .then(data => {
+        const maps = data.rows;
+        db.query(`SELECT * FROM markers;`)
+        .then(data => {
+          const markers = data.rows;
+
+          for(let map of maps){
+            map.markers = [];
+            for(let marker of markers){
+              if(marker.map_id === map.id){
+                map.markers.push(marker);
+              }
+             }
+          }
+
+
+          res.json({maps});
+        })
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
+
+
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM maps;`)
       .then(data => {

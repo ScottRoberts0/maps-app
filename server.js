@@ -32,17 +32,34 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
 const mapsRoutes = require("./routes/maps");
-// Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/maps", mapsRoutes(db));
 
-// Note: mount other resources here, using the same pattern above
+// api routes
+const usersRoutesAPI = require("./routes/usersAPI");
+const mapsRoutesAPI = require("./routes/mapsAPI");
+
+// Mount all resource routes
+app.get("/maps", (req, res) => {
+  res.render("maps");
+});
+
+app.get("/maps/:id", (req, res) => {
+  templateVars = {
+    id: req.params.id
+  }
+  res.render("maps_show", templateVars);
+});
+
+app.get("/maps/", (req, res) => {
+  templateVars = {
+    id: req.params.id
+  }
+  res.render("maps", templateVars);
+});
+
+
+app.use("/api/maps", mapsRoutesAPI(db));
+app.use("/api/users", usersRoutesAPI(db));
 
 
 // Home page

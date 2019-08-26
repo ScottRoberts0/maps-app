@@ -1,7 +1,10 @@
 $(() => {
+  const id = $('#id').text();
+  const url = "/api/maps/" + id;
+
   $.ajax({
     method: "GET",
-    url: "/api/maps/"
+    url: url
   }).done((mapsList) => {
 
     for (map of mapsList.maps) {
