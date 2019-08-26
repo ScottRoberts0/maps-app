@@ -50,30 +50,6 @@ app.get("/maps/:id", (req, res) => {
 
 
 
-
-const getAllMaps = function (){
-  let maps = [];
-  db.query(`SELECT * FROM maps;`)
-  .then(data => {
-    maps = data.rows;
-    db.query(`SELECT * FROM markers;`)
-    .then(data => {
-      const markers = data.rows;
-
-      for(let map of maps){
-        map.markers = [];
-        for(let marker of markers){
-          if(marker.map_id === map.id){
-            map.markers.push(marker);
-          }
-         }
-      }
-    })
-  })
-
-}
-
-
 app.get("/maps", (req, res) => {
   db.query(`SELECT * FROM maps;`)
   .then(data => {
@@ -130,7 +106,7 @@ app.get("/", (req, res) => {
       templateVars = {
         maps: maps
       }
-      res.render("index", templateVars);
+      res.render("user-maps", templateVars);
     })
   })
 
