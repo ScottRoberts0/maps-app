@@ -5,7 +5,7 @@ $(() => {
   }).done((mapsList) => {
 
     for (map of mapsList.maps) {
-      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("#map-body"));
+      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($(".carousel-inner"));
 
       let mapOptions = {
         center: [map.lat, map.long],
