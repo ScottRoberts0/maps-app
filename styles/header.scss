@@ -1,13 +1,31 @@
 header {
-  // background-color: rgb(172, 20, 44);
-  background-color: blue;
-  height: 80px;
+  background-color: rgb(140, 151, 170);
+  height: 70px;
+  width: 100%;
 
   div {
     color: #244751;
     float: right;
   }
   nav {
-    padding-top: 2%;
-  }
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+    a {
+      margin: 10px;
+    }
+    div.credentials {
+      margin-right: 10px;
+    }
+      h5 {
+        padding-top: 10px;
+        padding-right: 10px;
+      }
+      button {
+        margin: 10px;
+    height: 40px;
+    width: 85px;
+      }
+}
 }
