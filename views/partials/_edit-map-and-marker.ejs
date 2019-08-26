@@ -1,11 +1,38 @@
 <form class="form-inline">
-    <div class="form-group mb-2">
-      <label for="staticEmail2" class="sr-only">Email</label>
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-    </div>
+    <h5>Edit Map</h5>
     <div class="form-group mx-sm-3 mb-2">
-      <label for="inputPassword2" class="sr-only">Password</label>
-      <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+      <label for="lat" class="sr-only">lat</label>
+      <input type="text" class="form-control" id="lat" placeholder="lat:">
     </div>
-    <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="long" class="sr-only">long</label>
+        <input type="text" class="form-control" id="long" placeholder="long:">
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+          <label for="description" class="sr-only">description</label>
+          <input type="text" class="form-control" id="description" placeholder="description:">
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="img" class="sr-only">img</label>
+            <input type="url" class="form-control" id="img" placeholder="imgURL:">
+          </div>
+          <div class="form-group mx-sm-3 mb-2">
+              <label for="city" class="sr-only">city</label>
+              <input type="text" class="form-control" id="city" placeholder="city:">
+            </div>
+            <div class="dropdown-divider"></div>
+            <h5>Edit Marker</h5>
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="marker_lat" class="sr-only">marker_lat</label>
+                <input type="text" class="form-control" id="marker_lat" placeholder="lat:">
+              </div>
+              <div class="form-group mx-sm-3 mb-2">
+                  <label for="marker_long" class="sr-only">city</label>
+                  <input type="text" class="form-control" id="marker_long" placeholder="long:">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="marker_description" class="sr-only">marker_description</label>
+                    <input type="text" class="form-control" id="marker_description" placeholder="description:">
+                  </div>
+    <button type="submit" class="btn btn-primary mb-2">Submit</button>
   </form>
