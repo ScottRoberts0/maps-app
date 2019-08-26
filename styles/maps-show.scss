@@ -1,9 +1,8 @@
 body {
-
-div.buttons {
-
-}
-
-
-
+  div.if-user-loggedin {
+    width:10%;
+    form.form-inline {
+      padding-left: 5px;
+    }
+  }
 }
