@@ -38,11 +38,14 @@
             <a href="/singleMapRoute">
               <h4>hereDisplayMapDescription</h4>
             </a>
+            <% if ("user") { %>
             <form action="/addToUserfavoriteMaps" method="POST">
               <button class="btn btn-link" type="submit">
                 <h3><i class="fas fa-heart"></i></h3>
               </button>
             </form>
+            <% } else { %>
+              <% } %>
           </div>
         </div>
         <div class="carousel-item">
@@ -53,11 +56,14 @@
               <a href="/singleMapRoute">
                 <h4>hereDisplayMapDescription</h4>
               </a>
+              <% if ("user") { %>
               <form action="/addToUserfavoriteMaps" method="POST">
                 <button class="btn btn-link" type="submit">
                   <h3><i class="fas fa-heart"></i></h3>
                 </button>
               </form>
+              <% } else { %>
+                <% } %>
             </div>
           </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
