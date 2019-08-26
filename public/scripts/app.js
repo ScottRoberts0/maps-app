@@ -3,9 +3,9 @@ $(() => {
     method: "GET",
     url: "/api/maps/"
   }).done((mapsList) => {
-
+g
     for (map of mapsList.maps) {
-      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($(".carousel-inner"));
+      $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("body"));
 
       let mapOptions = {
         center: [map.lat, map.long],

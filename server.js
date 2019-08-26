@@ -31,8 +31,8 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// Separated Routes for each Resource
-const mapsRoutes = require("./routes/maps");
+// // Separated Routes for each Resource
+// const mapsRoutes = require("./routes/maps");
 
 // api routes
 const usersRoutesAPI = require("./routes/usersAPI");
