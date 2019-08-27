@@ -8,7 +8,7 @@ $(() => {
   }).done((mapsList) => {
 
     for (map of mapsList.maps) {
-      $("<div>").attr('id', 'map' + map.id).css({ "width": "40vw", "height": "580px" }).appendTo($(".map-body"));
+      $("<div>").attr({'id': 'map' + map.id, 'class': "border border-dark"}).css({ "width": "70vw", "height": "70vh" }).appendTo($(".map-body"));
       $("<ul>").appendTo($("body"));
       $("<ul>").append(`<li>`)
       let mapOptions = {
