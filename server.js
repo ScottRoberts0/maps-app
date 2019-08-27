@@ -47,7 +47,10 @@ const mapsRoutesAPI = require("./routes/mapsAPI");
 
 // Mount all resource routes
 app.get("/maps/create", (req, res) => {
-  res.render("map_create");
+  templateVars = {
+    user: req.session.userEmail
+  }
+  res.render("map_create", templateVars);
 })
 
 app.get("/maps/:id", (req, res) => {
@@ -115,13 +118,16 @@ const getUserInfo = function (email) {
 const checkPassword = function (email, password) {
   return (getUserInfo(email))
     .then(user => {
-      if (bcrypt.compareSync(password, user.password)) {
-        return user
-      }
-      else {
+
+      if(user !== null){
+         if (bcrypt.compareSync(password, user.password)) {
+          return user
+         }
+      } else {
         return null;
       }
     })
+    .catch(error => console.log(error));
 };
 
 const createNewUser = function(email, password) {
@@ -141,7 +147,7 @@ app.get("/register", (req, res) => {
   templateVars = {
     user: req.session.userEmail
   }
-  res.render("register")
+  res.render("register", templateVars)
 })
 
 app.post("/register", (req, res) => {
@@ -171,7 +177,7 @@ app.post("/login", (req, res) => {
   checkPassword(email, password)
     .then(user => {
       if (!user) {
-        res.send({ error: "Username or password does not exist" });
+        res.redirect("/register");
         return;
       }
       else {
@@ -179,7 +185,7 @@ app.post("/login", (req, res) => {
         res.redirect("/")
       }
     })
-    .catch(error => res.send(error));
+    .catch(error => res.send("hello"));
 });
 
 app.post("/logout", (req, res) => {
