@@ -2,6 +2,11 @@ header {
   background-color: rgb(140, 151, 170);
   height: 70px;
   width: 100%;
+div.header-all-maps {
+  display: inline-flex;
+  align-items: center;
+
+}
 
   div {
     color: #244751;
@@ -17,6 +22,10 @@ header {
     }
     div.credentials {
       margin-right: 10px;
+      form {
+        display: inline-flex;
+      align-items: center;
+      }
     }
       h5 {
         padding-top: 10px;
