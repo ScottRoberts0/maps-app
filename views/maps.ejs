@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -28,22 +27,7 @@
     <% include ./partials/_header %>
   </header>
   <div class="flex">
-    <% if ("user") { %>
-    <div class="if-user-loggedin">
-      <a class="dropdown-item" href="/singleUserMapsRoute">
-        <h4>My Maps</h4>
-      </a>
-      <a class="dropdown-item" href="/maps/create">
-        <h4>Create Map</h4>
-      </a>
-      <a class="dropdown-item" href="/userFavoriteMapsRoute">
-        <h4>Favorite Maps</h4>
-      </a>
-    </div>
-    <% } else { %>
-    <div>
-    </div>
-    <% } %>
+      <% include ./partials/_logged-in-side-nav %>
       <div class="all-maps">
         <% for(map of maps){ %>
           <div class="card">
