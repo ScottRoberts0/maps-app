@@ -55,7 +55,8 @@ app.get("/maps/create", (req, res) => {
 
 app.get("/maps/:id", (req, res) => {
   templateVars = {
-    id: req.params.id
+    id: req.params.id,
+    user: req.session.userEmail
   }
   res.render("maps_show", templateVars);
 });
