@@ -9,8 +9,11 @@ $(() => {
 
     for (map of mapsList.maps) {
       $("<div>").attr('id', 'map' + map.id).css({ "width": "900px", "height": "580px" }).appendTo($("body"));
-      $("<ul>").appendTo($("body"));
-      $("<ul>").append(`<li>`)
+
+
+
+
+
       let mapOptions = {
         center: [map.lat, map.long],
         zoom: 11
@@ -46,7 +49,24 @@ $(() => {
 
         newMarker.addTo(newMap); // Adding marker to the map
 
-        $("ul").append(`<li>${marker.title}</li>`)
+
+        let markup = `
+        <tr>
+          <td>${marker.title}</td>
+          <td>${marker.description}</td>
+          <td>${marker.address}</td>
+          <td>
+            <form method="POST" action="/maps/${map.id}">
+              <input type="hidden" name="marker_id" id="hiddenField" value="${marker.id}" />
+              <input type="hidden" name="map_id" id="hiddenField" value="${map.id}" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>`;
+
+
+      $("tbody").append(markup);
+
 
       }
     }

@@ -8,5 +8,6 @@ CREATE TABLE markers (
   title VARCHAR(255),
   description VARCHAR(255),
   img VARCHAR(255),
+  address VARCHAR(255),
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE
 );

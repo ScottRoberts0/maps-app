@@ -221,7 +221,7 @@ app.get("/", (req, res) => {
     })
 });
 
-const opencage = require('opencage-api-client');
+
 
 
 app.post("/maps/create", (req, res) => {
@@ -235,17 +235,9 @@ app.post("/maps/create", (req, res) => {
         var place = data.results[0];
 
 
-        const lat = place.geometry.lat;
-        const long = place.geometry.lng;
-        // console.log(lat);
-        // console.log(long);
-        // console.log(city)
-        // console.log(title)
-        // console.log(img)
-        //  db.query(`
-        //  INSERT INTO maps (lat, long, city, title, img, user_id)
-        //  VALUES (${lat}, ${long}, ${city}, ${title}, ${img}, 1)
-        //  RETURNING *;`)
+       const lat = place.geometry.lat;
+       const long = place.geometry.lng;
+
         db.query(`INSERT INTO maps (lat, long, city, title, img, user_id)
         VALUES (${lat}, ${long}, '${city}', '${title}', '${img}', 1)
         RETURNING *;`)
@@ -259,7 +251,6 @@ app.post("/maps/create", (req, res) => {
     } else if (data.status.code == 402) {
       console.log('hit free-trial daily limit');
       console.log('become a customer: https://opencagedata.com/pricing');
-
     } else {
       // other possible response codes:
       // https://opencagedata.com/api#codes
@@ -273,6 +264,70 @@ app.post("/maps/create", (req, res) => {
 
 })
 
+
+app.post("/maps/:id", (req, res) => {
+
+  if(req.body.title){
+  const map_id = req.params.id;
+  const title = req.body.title;
+  const description = req.body.description;
+  const img = req.body.img;
+  const address = req.body.address;
+  console.log("IM IN HERE1")
+
+  opencage.geocode({q: address},'6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
+    // console.log(JSON.stringify(data));
+     if (data.status.code == 200) {
+       if (data.results.length > 0) {
+         var place = data.results[0];
+        console.log("IM IN HERE2")
+        const lat = place.geometry.lat;
+        const long = place.geometry.lng;
+
+         db.query(`INSERT INTO markers (lat, long, title, description, img, address, map_id)
+         VALUES (${lat}, ${long}, '${title}', '${description}', '${img}', '${address}', ${map_id})
+         RETURNING *;`)
+        .then(data => {
+
+         const redirectUrl =  "/maps/" + map_id;
+         res.redirect(redirectUrl);
+        })
+
+       }
+     } else if (data.status.code == 402) {
+       console.log('hit free-trial daily limit');
+       console.log('become a customer: https://opencagedata.com/pricing');
+
+     } else {
+       // other possible response codes:
+       // https://opencagedata.com/api#codes
+       console.log('error', data.status.message);
+       res.send("ERROR1")
+     }
+   })
+   .catch(error => {
+     console.log('error', error.message);
+     res.send("ERROR1")
+   })
+  }else{
+
+
+
+
+
+   const markerID = req.body.marker_id;
+    const mapID = req.body.map_id;
+   db.query(`DELETE FROM markers WHERE id = ${markerID}`)
+  .then(data => {
+   const redirectUrl =  "/maps/" + mapID;
+   res.redirect(redirectUrl);
+  })
+
+
+
+  }
+
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
