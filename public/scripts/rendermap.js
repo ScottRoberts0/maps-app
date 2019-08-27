@@ -46,7 +46,24 @@ $(() => {
 
         newMarker.addTo(newMap); // Adding marker to the map
 
-        $("ul").append(`<li>${marker.title}</li>`)
+
+        let markup = `
+        <tr>
+          <td>${marker.title}</td>
+          <td>${marker.description}</td>
+          <td>${marker.address}</td>
+          <td>
+            <form method="POST" action="/maps/${map.id}">
+              <input type="hidden" name="marker_id" id="hiddenField" value="${marker.id}" />
+              <input type="hidden" name="map_id" id="hiddenField" value="${map.id}" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>`;
+
+
+      $("tbody").append(markup);
+
 
       }
     }
