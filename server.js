@@ -2,13 +2,20 @@
 require('dotenv').config();
 
 // Web server config
-const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
 const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
-const app        = express();
-const morgan     = require('morgan');
+const sass = require("node-sass-middleware");
+const app = express();
+const bcrypt = require('bcrypt');
+const morgan = require('morgan');
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -53,28 +60,28 @@ app.get("/maps/:id", (req, res) => {
 
 app.get("/maps", (req, res) => {
   db.query(`SELECT * FROM maps;`)
-  .then(data => {
-    maps = data.rows;
-    db.query(`SELECT * FROM markers;`)
     .then(data => {
-      const markers = data.rows;
+      maps = data.rows;
+      db.query(`SELECT * FROM markers;`)
+        .then(data => {
+          const markers = data.rows;
 
-      for(let map of maps){
-        map.markers = [];
-        for(let marker of markers){
-          if(marker.map_id === map.id){
-            map.markers.push(marker);
+          for (let map of maps) {
+            map.markers = [];
+            for (let marker of markers) {
+              if (marker.map_id === map.id) {
+                map.markers.push(marker);
+              }
+            }
+
           }
-         }
 
-      }
-
-      templateVars = {
-        maps: maps
-      }
-      res.render("maps", templateVars);
+          templateVars = {
+            maps: maps
+          }
+          res.render("maps", templateVars);
+        })
     })
-  })
 
 });
 
@@ -86,30 +93,126 @@ app.use("/api/users", usersRoutesAPI(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
+app.get("/login", (req, res) => {
+  templateVars = {
+    user: req.session.userEmail
+  }
+  res.render("login", templateVars)
+});
+
+const getUserInfo = function (email) {
+  return db.query(`SELECT * FROM users WHERE email = $1;`, [email])
+    .then(data => {
+      if (data.rows) {
+        return data.rows[0]
+      } else {
+        return null;
+      }
+    })
+};
+
+const checkPassword = function (email, password) {
+  return (getUserInfo(email))
+    .then(user => {
+      if (bcrypt.compareSync(password, user.password)) {
+        return user
+      }
+      else {
+        return null;
+      }
+    })
+};
+
+const createNewUser = function(email, password) {
+  return db.query(`INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;`, [email, password])
+  .then(data => {
+    if(data.rows[0]){
+      return data.rows[0];
+    }else{
+      return null;
+    }
+  }).catch(error => {
+    console.log(error)
+  })
+};
+
+app.get("/register", (req, res) => {
+  templateVars = {
+    user: req.session.userEmail
+  }
+  res.render("register")
+})
+
+app.post("/register", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const hashedPass = bcrypt.hashSync(password, 10);
+  getUserInfo(email)
+    .then(userInfo => {
+      if (userInfo) {
+        return res.status(400).send('email address has already been registered');
+      }else{
+        createNewUser(email, hashedPass)
+        .then(user => {
+          req.session.userEmail = user.email;
+          res.redirect("/")
+
+        })
+
+      }
+    })
+})
+
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  checkPassword(email, password)
+    .then(user => {
+      if (!user) {
+        res.send({ error: "Username or password does not exist" });
+        return;
+      }
+      else {
+        req.session.userEmail = user.email;
+        res.redirect("/")
+      }
+    })
+    .catch(error => res.send(error));
+});
+
+app.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+})
+
+
 app.get("/", (req, res) => {
   db.query(`SELECT * FROM maps LIMIT 10;`)
-  .then(data => {
-    maps = data.rows;
-    db.query(`SELECT * FROM markers;`)
     .then(data => {
-      const markers = data.rows;
+      maps = data.rows;
+      db.query(`SELECT * FROM markers;`)
+        .then(data => {
+          const markers = data.rows;
 
-      for(let map of maps){
-        map.markers = [];
-        for(let marker of markers){
-          if(marker.map_id === map.id){
-            map.markers.push(marker);
+          for (let map of maps) {
+            map.markers = [];
+            for (let marker of markers) {
+              if (marker.map_id === map.id) {
+                map.markers.push(marker);
+              }
+            }
+
           }
-         }
 
-      }
-
-      templateVars = {
-        maps: maps
-      }
-      res.render("index", templateVars);
+          templateVars = {
+            maps: maps,
+            user: req.session.userEmail
+          }
+          res.render("index", templateVars);
+        })
     })
-  })
 });
 
 const opencage = require('opencage-api-client');
@@ -126,25 +229,25 @@ app.post("/maps/create", (req, res) => {
         var place = data.results[0];
 
 
-       const lat = place.geometry.lat;
-       const long = place.geometry.lng;
-      // console.log(lat);
-      // console.log(long);
-      // console.log(city)
-      // console.log(title)
-      // console.log(img)
-      //  db.query(`
-      //  INSERT INTO maps (lat, long, city, title, img, user_id)
-      //  VALUES (${lat}, ${long}, ${city}, ${title}, ${img}, 1)
-      //  RETURNING *;`)
+        const lat = place.geometry.lat;
+        const long = place.geometry.lng;
+        // console.log(lat);
+        // console.log(long);
+        // console.log(city)
+        // console.log(title)
+        // console.log(img)
+        //  db.query(`
+        //  INSERT INTO maps (lat, long, city, title, img, user_id)
+        //  VALUES (${lat}, ${long}, ${city}, ${title}, ${img}, 1)
+        //  RETURNING *;`)
         db.query(`INSERT INTO maps (lat, long, city, title, img, user_id)
         VALUES (${lat}, ${long}, '${city}', '${title}', '${img}', 1)
         RETURNING *;`)
-       .then(data => {
-        const id = data.rows[0].id;
-        const redirectUrl =  "/maps/" + id;
-        res.redirect(redirectUrl);
-       })
+          .then(data => {
+            const id = data.rows[0].id;
+            const redirectUrl = "/maps/" + id;
+            res.redirect(redirectUrl);
+          })
 
       }
     } else if (data.status.code == 402) {
@@ -157,9 +260,9 @@ app.post("/maps/create", (req, res) => {
       console.log('error', data.status.message);
     }
   })
-  .catch(error => {
-    console.log('error', error.message);
-  })
+    .catch(error => {
+      console.log('error', error.message);
+    })
 
 
 })
