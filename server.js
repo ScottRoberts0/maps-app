@@ -80,7 +80,8 @@ app.get("/maps", (req, res) => {
           }
 
           templateVars = {
-            maps: maps
+            maps: maps,
+            user: req.session.userEmail
           }
           res.render("maps", templateVars);
         })
