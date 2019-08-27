@@ -10,10 +10,10 @@
   <link rel="stylesheet" href="/styles/create-map.css" type="text/css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/createmap.js"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -29,43 +29,27 @@
   </header>
   <div class="flex">
     <div>
-      <% if (user) { %>
-      <div class="if-user-loggedin">
-        <a class="dropdown-item" href="/singleUserMapsRoute">
-          <h4>My Maps</h4>
-        </a>
-        <a class="dropdown-item" href="/maps/create">
-          <h4>Create Map</h4>
-        </a>
-        <a class="dropdown-item" href="/userFavoriteMapsRoute">
-          <h4>Favorite Maps</h4>
-        </a>
-      </div>
-      <% } else { %>
-      <div>
-      </div>
-      <% } %>
+      <% include ./partials/_logged-in-side-nav %>
       <div class="dropdown-divider"></div>
-
     </div>
     <div class="create-form">
-        <h1>Create</h1>
-        <form action="/maps/create" method="POST">
-          <div class="form-group">
-            <label for="title">Name</label>
-            <input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Map Name">
-          </div>
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" class="form-control" name="city" placeholder="City">
-          </div>
-          <div class="form-group">
-            <label for="img">Image</label>
-            <input type="text" class="form-control" name="img" placeholder="Img Url">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
+      <h1>Create</h1>
+      <form action="/maps/create" method="POST">
+        <div class="form-group">
+          <label for="title">Name</label>
+          <input type="text" class="form-control" name="title" aria-describedby="emailHelp" placeholder="Map Name">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" name="city" placeholder="City">
+        </div>
+        <div class="form-group">
+          <label for="img">Image</label>
+          <input type="text" class="form-control" name="img" placeholder="Img Url">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
 
 
   </div>
