@@ -1,27 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>All Maps</title>
 
-    <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
-    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/maps-show.css" type="text/css" />
 
-  </head>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!-- font awesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css"
+    integrity="sha384-wxqG4glGB3nlqX0bi23nmgwCSjWIW13BdLUEYC4VIMehfbcro/ATkyDsF/AbIOVe" crossorigin="anonymous">
 
-  <body>
-    <h1>Show All Maps</h1>
+</head>
 
-<% for(map of maps){ %>
-  <div><%= map.id %></div>
-  <div> <%= map.city %></div>
-  <div><%= map.title %></div>
-  <img src=<%= map.img %> style="width: 100px"; height: 75px">
-<% } %>
+<body>
+  <header class="border border-dark">
+    <% include ./partials/_header %>
+  </header>
+  <div class="flex">
+    <% if ("user") { %>
+    <div class="if-user-loggedin">
+      <a class="dropdown-item" href="/singleUserMapsRoute">
+        <h4>My Maps</h4>
+      </a>
+      <a class="dropdown-item" href="/maps/create">
+        <h4>Create Map</h4>
+      </a>
+      <a class="dropdown-item" href="/userFavoriteMapsRoute">
+        <h4>Favorite Maps</h4>
+      </a>
+    </div>
+    <% } else { %>
+    <div>
+    </div>
+    <% } %>
+      <div class="all-maps">
+        <% for(map of maps){ %>
+          <div class="card">
+              <img src="<%= map.img %>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
+                <p class="card-text"><%= map.title %></p>
+                <a href="/maps/<%= map.id %>" class="btn btn-primary">Go</a>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+        <% } %>
+      </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
 
-  </body>
+</html>
+
+
+</body>
+
 </html>
