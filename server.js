@@ -107,7 +107,7 @@ app.get("/", (req, res) => {
       templateVars = {
         maps: maps
       }
-      res.render("user-maps", templateVars);
+      res.render("index", templateVars);
     })
   })
 });
@@ -119,7 +119,7 @@ app.post("/maps/create", (req, res) => {
   const title = req.body.title;
   const city = req.body.city;
   const img = req.body.img;
-  opencage.geocode({q: city}).then(data => {
+  opencage.geocode({q: city}, '6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
    // console.log(JSON.stringify(data));
     if (data.status.code == 200) {
       if (data.results.length > 0) {
