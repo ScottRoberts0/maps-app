@@ -40,13 +40,12 @@
                 <h2><%= map.title %></h2>
                 <h4><%= map.city %></h4>
               </a>
-              <% if ("user") { %>
+              <% if (user) { %>
               <form action="/addToUserfavoriteMaps" method="POST">
                 <button class="btn btn-link" type="submit">
                   <h3><i class="fas fa-heart"></i></h3>
                 </button>
               </form>
-              <% } else { %>
               <% } %>
             </div>
           </div>
