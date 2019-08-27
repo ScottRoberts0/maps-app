@@ -17,11 +17,10 @@ div.header-all-maps {
     justify-content: space-between;
     height: 100%;
     align-items: center;
-    a {
-      margin: 10px;
-    }
+
     div.credentials {
       margin-right: 10px;
+      display: inline-flex;
       form {
         display: inline-flex;
       align-items: center;
