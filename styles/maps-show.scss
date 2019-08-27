@@ -1,8 +1,16 @@
 body {
   div.if-user-loggedin {
-    width:10%;
+    width:20%;
     form.form-inline {
       padding-left: 5px;
     }
   }
-}
+  div.all-maps {
+    margin-top: 2%;
+    height: 90%;
+    overflow-x: auto;
+    margin-right: 10%;
+    width: 75%;
+  }
+  }
+
