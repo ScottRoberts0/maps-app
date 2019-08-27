@@ -1,4 +1,5 @@
 body {
+  overflow-y: auto;
   div.if-user-loggedin {
     width:20%;
     form.form-inline {
@@ -6,14 +7,13 @@ body {
     }
   }
   div.all-maps {
-    margin-top: 2%;
     height: 90%;
     overflow-x: auto;
-    margin-right: 10%;
     width: 75%;
+    margin: auto;
   }
   div.map-body {
-    margin: 10%;
+    margin: auto;
   }
   .map {
     min-width: 25vw;
