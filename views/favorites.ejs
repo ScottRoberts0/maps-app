@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Favorites</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/maps-show.css" type="text/css" />
+
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!-- font awesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css"
+    integrity="sha384-wxqG4glGB3nlqX0bi23nmgwCSjWIW13BdLUEYC4VIMehfbcro/ATkyDsF/AbIOVe" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <header class="border border-dark">
+    <% include ./partials/_header %>
+  </header>
+  <div class="flex">
+      <% include ./partials/_logged-in-side-nav %>
+      <div class="all-maps">
+        <% for(map of maps){ %>
+          <div class="card">
+              <img src="<%= map.img %>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
+                <p class="card-text"><%= map.title %></p>
+                <a href="/maps/<%= map.id %>" class="btn btn-primary">Go</a>
+                <form method="POST" action="/favorites/<%= map.fav_id %>">
+                  <button type="submit" class="btn btn-danger">Remove Favorite</button>
+                </form>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+        <% } %>
+      </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+</body>
+
+</html>
+
