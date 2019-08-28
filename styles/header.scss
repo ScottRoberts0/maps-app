@@ -2,6 +2,11 @@ header {
   background-color: rgb(140, 151, 170);
   height: 70px;
   width: 100%;
+  position: fixed;
+  z-index: 999;
+  top:0;
+  padding-left: 5px;
+
 div.header-all-maps {
   display: inline-flex;
   align-items: center;
@@ -38,3 +43,5 @@ div.header-all-maps {
       }
 }
 }
+
+
