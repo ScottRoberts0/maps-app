@@ -1,6 +1,8 @@
 // See: https://sass-lang.com/
 
 body {
+
+
   div.if-user-loggedin {
     width:10%;
 
@@ -26,9 +28,8 @@ body {
       a {
         color: aliceblue;
       }
-      button {
-        color:red;
-      }
+
+
       background-color: rgba(0, 0, 0, 0.3);
   }
   img {
@@ -44,6 +45,31 @@ body {
 .map-markers-container {
   margin-right: 5%;
   margin-top: 20px;
+}
+
+.heart {
+  width: 100px;
+  height: 100px;
+  display: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  animation: fave-heart 1s steps(28);
+}
+.heart:hover {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+@keyframes fave-heart {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2800px 0;
+  }
 }
 };
 

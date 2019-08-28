@@ -32,7 +32,14 @@
     </div>
     <div class="map-markers-container">
       <div class="map-body"></div>
-      <form id="form1"><input type="hidden" name="id" value="1" /></form>
+
+
+      <% if(user) { %>
+      <form  action="/maps/<%= id %>" id="my_form" method="POST"><input type="hidden" name="id" value="1" /></form>
+        <% } %>
+
+
+
       <table class="table">
         <thead>
           <tr>
@@ -45,12 +52,19 @@
         </thead>
         <tbody>
           <tr>
-            <td> <input type="text" class="form-control" name="title" placeholder="Marker Name"></td>
-            <td><input type="text" class="form-control" name="description" placeholder="Description"></td>
-            <td> <input type="text" class="form-control" name="address" placeholder="Address"></td>
-            <td> <input type="text" class="form-control" name="img" placeholder="ImgURL"></td>
-            <td><button type="submit" class="btn btn-success">Add Pin</button></td>
+            <td> <input type="text" form="my_form" class="form-control" name="title" placeholder="Marker Name"></td>
+            <td><input type="text" form="my_form" class="form-control" name="description" placeholder="Description"></td>
+            <td> <input type="text" form="my_form" class="form-control" name="address" placeholder="Address"></td>
+            <td> <input type="text" form="my_form" class="form-control" name="img" placeholder="ImgURL"></td>
+            <td><button type="submit" form="my_form" id="addpin" class="btn btn-success">Pin</button></td>
           </tr>
+          <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Address</th>
+              <th scope="col">Username</th>
+              <th scope="col"></th>
+            </tr>
         </tbody>
       </table>
     </div>

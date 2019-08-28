@@ -193,7 +193,8 @@ app.get("/maps", (req, res) => {
 
           templateVars = {
             maps: maps,
-            user: req.session.userEmail
+            user: req.session.userEmail,
+            userid: req.session.id
           }
           res.render("maps", templateVars);
         })

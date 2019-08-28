@@ -41,7 +41,7 @@ $(() => {
         newMarker.bindPopup(`
         <h1>${marker.title}</h1>
         <p>${marker.description}</p>
-        <img src=${marker.img} style="width: 50px; height: 50px;">
+        <a href=${marker.img}><img src=${marker.img} style="width: 50px; height: 50px;"></a>
         `);
 
         newMarker.addTo(newMap); // Adding marker to the map
@@ -52,6 +52,7 @@ $(() => {
           <td>${marker.title}</td>
           <td>${marker.description}</td>
           <td>${marker.address}</td>
+          <td>HARD CODED USER</td>
           <td>
             <form method="POST" action="/maps/${map.id}">
               <input type="hidden" name="marker_id" id="hiddenField" value="${marker.id}" />

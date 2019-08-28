@@ -20,6 +20,7 @@
 </head>
 
 <body>
+
   <header class="border border-dark">
     <% include ./partials/_header %>
   </header>
@@ -44,9 +45,10 @@
 
 
                 <button class="btn btn-link fav-btn" type="submit">
-                    <input type="hidden" class="userid" name="userid" value=<%= user.id %>>
+                    <input type="hidden" class="userid" name="userid" value=<%= userid %>>
                     <input type="hidden" class="mapid" name="userid" value=<%= map.id %>>
-                  <h3><i class="fas fa-heart"></i></h3>
+
+                    <div class="heart"></div>
                 </button>
 
 
@@ -71,5 +73,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"></script>
 </body>
+
 
 </html>
