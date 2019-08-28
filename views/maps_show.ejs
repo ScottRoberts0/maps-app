@@ -38,7 +38,7 @@
       <form  action="/maps/<%= id %>" id="my_form" method="POST"><input type="hidden" name="id" value="1" /></form>
         <% } %>
 
-
+        <input type="text" id="userid" form="my_form" name="userid" value='<%= userid %>' hidden></td>
 
       <table class="table">
         <thead>
@@ -62,7 +62,7 @@
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Address</th>
-              <th scope="col">Username</th>
+              <th scope="col">Pinned By</th>
               <th scope="col"></th>
             </tr>
         </tbody>
