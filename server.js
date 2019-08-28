@@ -126,10 +126,28 @@ app.post("/favorite", (req, res) => {
     })
 })
 
+app.post("/favorites/:id", (req, res) =>  {
+  const id = req.params.id;
+
+  db.query(`
+   DELETE FROM favorites
+   WHERE id = $1;`,
+  [id])
+  .then(data => {
+    res.redirect("/favorites")
+  })
+
+});
+
 app.get("/favorites", (req, res) => {
 
   const id = req.session.id;
-  db.query(`SELECT * FROM maps JOIN favorites ON maps.id = favorites.map_id WHERE favorites.user_id = $1;`, [id])
+  db.query(`
+  SELECT maps.id, maps.lat, maps.long, maps.city, maps.title, maps.img, maps.user_id, favorites.id AS fav_id
+  FROM maps
+  JOIN favorites ON maps.id = favorites.map_id
+  WHERE favorites.user_id = $1;`,
+  [id])
     .then(data => {
       maps = data.rows;
       db.query(`SELECT * FROM markers;`)
