@@ -1,7 +1,22 @@
 header {
-  background-color: rgb(140, 151, 170);
-  height: 70px;
+
+  position: sticky;
+  nav select {
+    display: none;
+  }
+  @media (max-width: 960px) {
+    nav div.credentials { display: none; }
+    nav select { display: inline-block; }
+  }
+
+  // background-color: rgb(140, 151, 170);
+  // height: 70px;
   width: 100%;
+  // position: fixed;
+  z-index: 1010;
+  top:0;
+  // padding-left: 5px;
+
 div.header-all-maps {
   display: inline-flex;
   align-items: center;
@@ -13,11 +28,14 @@ div.header-all-maps {
     color: #244751;
     float: right;
   }
+  }
   nav {
     display: flex;
     justify-content: space-between;
     height: 100%;
     align-items: center;
+
+
 
     div.credentials {
       margin-right: 10px;
@@ -25,6 +43,9 @@ div.header-all-maps {
       form {
         display: inline-flex;
       align-items: center;
+      }
+      @media (max-width: 960px) {
+         display: none;
       }
     }
       h5 {
@@ -37,4 +58,6 @@ div.header-all-maps {
     width: 85px;
       }
 }
-}
+
+
+
