@@ -388,7 +388,6 @@ app.post("/maps/:id", (req, res) => {
     const description = req.body.description;
     const img = req.body.img;
     const address = req.body.address;
-    console.log("IM IN HERE1")
 
     opencage.geocode({ q: address }, '6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
       // console.log(JSON.stringify(data));
@@ -443,6 +442,19 @@ app.post("/maps/:id", (req, res) => {
   }
 
 })
+
+app.post("/maps/:id/delete", (req, res) => {
+  const id = req.params.id;
+
+  db.query(`
+   DELETE FROM maps
+   WHERE id = $1;`,
+  [id])
+  .then(data => {
+    res.redirect("/mymaps")
+  })
+})
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

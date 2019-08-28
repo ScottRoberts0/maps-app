@@ -36,6 +36,9 @@
                 <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
                 <p class="card-text"><%= map.title %></p>
                 <a href="/maps/<%= map.id %>" class="btn btn-primary">Go</a>
+                <form method="POST" action="/maps/<%= map.id %>/delete">
+                  <button type="submit" class="btn btn-danger">Delete Map</button>
+                </form>
               </div>
             </div>
             <div class="dropdown-divider"></div>
