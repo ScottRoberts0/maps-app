@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-  <title>Favorites</title>
+  <title>Sign In</title>
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/maps-show.css" type="text/css" />
 
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -27,41 +26,37 @@
     <% include ./partials/_header %>
     <% include ./partials/_user-register-sign-in %>
   </header>
-  <div class="flex">
-    <% include ./partials/_logged-in-side-nav %>
-    <div class="all-maps">
-      <% for(map of maps){ %>
-      <div class="card">
-        <img src="<%= map.img %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
-          <p class="card-text"><%= map.title %></p>
-
-          <div class="go-and-fav">
-            <button class="btn btn-outline-primary">
-              <a href="/maps/<%= map.id %>">Go</a>
-            </button>
-            <form method="POST" action="/favorites/<%= map.fav_id %>">
-              <button type="submit" class="btn btn-outline-danger">Remove Favorite</button>
-            </form>
-          </div>
-
-
-        </div>
-      </div>
-      <div class="dropdown-divider"></div>
-      <% } %>
+  <div class="card" style="width: 25rem;">
+    <div class="card-body">
+      <div>
+      <h3 class="card-title">Profile <strong><i class="far fa-user"></i></strong></h3>
     </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Username:</strong>> "map.user.id"</li>
+      <li class="list-group-item"><strong>Email address:</strong>> "map.user.email"</li>
+
+      <li class="list-group-item"><strong>Favourite maps:</strong>
+        <% for(map of maps){ %>
+          <div>
+        <a href="/maps/<%= map.idForSingleUser %>" class="btn btn-primary"></a>DescriptionFor-map.idForSingleUser
+        <% } %>
+      </div>
+      </li>
+      <li class="list-group-item"><strong>Contributed to:</strong>
+        <% for(map of maps){ %>
+          <div>
+        <a href="/maps/<%= map.idForContributedMaps %>"class="btn btn-primary"></a>DescriptionFor-map.idForidForContributedMaps
+        <% } %>
+      </div>
+      </li>
+
+    </ul>
   </div>
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-</body>
-
-</html>
-
-
 </body>
 
 </html>

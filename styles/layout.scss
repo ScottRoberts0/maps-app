@@ -1,6 +1,27 @@
 // See: https://sass-lang.com/
 
 body {
+  div.card {
+    div.card-body {
+      div.card-title {
+        width:100%;
+        height: 33px;
+        .card-text {
+          width:100%;
+        }
+      }
+      button {
+        height: fit-content;
+        margin-left: 60px;
+      }
+    }
+    h5 {
+      div.heart {
+        margin-bottom: 10px;
+      }
+
+    }
+  }
 
 
   div.if-user-loggedin {
@@ -25,6 +46,7 @@ body {
     margin-top: 2%;
   }
     .carousel-caption {
+      padding: 0;
       a {
         color: aliceblue;
       }
@@ -87,12 +109,12 @@ div.go-and-fav {
 }
 
 .heart {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 65px;
   display: absolute;
   left: 50%;
   top: 80%;
-  transform: translate(-50%, -50%);
+  transform: translate(0%, -61%);
   background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
   background-position: 0 0;
   cursor: pointer;
