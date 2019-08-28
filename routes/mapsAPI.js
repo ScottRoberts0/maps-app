@@ -15,7 +15,7 @@ module.exports = (db) => {
     db.query(`SELECT * FROM maps WHERE id = $1;`, [id])
       .then(data => {
         const maps = data.rows;
-        db.query(`SELECT * FROM markers;`)
+        db.query(`SELECT markers.*, users.email FROM markers JOIN users ON markers.user_id = users.id;`)
         .then(data => {
           const markers = data.rows;
 
