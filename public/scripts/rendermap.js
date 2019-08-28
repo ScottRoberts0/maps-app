@@ -1,6 +1,7 @@
 $(() => {
   const id = $('#id').text();
   const url = "/api/maps/" + id;
+  const userid = $('#userid').val();
 
   $.ajax({
     method: "GET",
@@ -47,18 +48,25 @@ $(() => {
         newMarker.addTo(newMap); // Adding marker to the map
 
 
+
         let markup = `
         <tr>
           <td>${marker.title}</td>
           <td>${marker.description}</td>
           <td>${marker.address}</td>
-          <td>HARD CODED USER</td>
+          <td>${marker.email}</td>
           <td>
-            <form method="POST" action="/maps/${map.id}">
-              <input type="hidden" name="marker_id" id="hiddenField" value="${marker.id}" />
-              <input type="hidden" name="map_id" id="hiddenField" value="${map.id}" />
-              <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+          `;
+
+        if(userid == marker.user_id){
+          markup += `<form method="POST" action="/maps/${map.id}">
+          <input type="hidden" name="marker_id" id="hiddenField" value="${marker.id}" />
+          <input type="hidden" name="map_id" id="hiddenField" value="${map.id}" />
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>`;
+        }
+        markup += `
+
           </td>
         </tr>`;
 
