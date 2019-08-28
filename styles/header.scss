@@ -1,13 +1,21 @@
 header {
 
   position: sticky;
+  nav h5 {
+    color: aliceblue;
+  }
+  nav h2 {
+    color: aliceblue;
+  }
+
+  strong {
+    color: aliceblue;
+    }
+
   nav select {
     display: none;
   }
-  @media (max-width: 960px) {
-    nav div.credentials { display: none; }
-    nav select { display: inline-block; }
-  }
+
 
   // background-color: rgb(140, 151, 170);
   // height: 70px;
