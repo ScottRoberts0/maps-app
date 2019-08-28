@@ -10,8 +10,6 @@ body {
   }
   background-color: rgba(15, 23, 37, 0.212);
   div.flex {
-    // padding-top: 70px;
-    // position: fixed;
     background-color: rgba(15, 23, 37, 0.212);
     width:100%;
     display: flex;
@@ -20,7 +18,9 @@ body {
     overflow-y: auto;
   #carouselExampleControls {
     width:70%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
   }
     .carousel-caption {
       a {
@@ -42,8 +42,47 @@ body {
   width: 70vw;
  }
 .map-markers-container {
-  margin-right: 5%;
-  margin-top: 20px;
+  margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: 2%;
+}
+div.go-and-fav {
+  display: inline-flex;
+  form {
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 991px) {
+  div.flex { flex-direction: column }
+  div.looged-in-side-bar {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    display: flex;
+  }
+  div.flex {
+
+
+  #carouselExampleControls {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-top: inherit;
+  }
+}
+.map-markers-container {
+
+}
+}
+@media (max-width: 370px) {
+  div.flex { flex-direction: column }
+  div.looged-in-side-bar {
+    width: 75%;
+    margin: 0;
+    display: flex;
+  }
 }
 };
 
