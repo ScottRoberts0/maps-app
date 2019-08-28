@@ -27,23 +27,30 @@
     <% include ./partials/_header %>
   </header>
   <div class="flex">
-      <% include ./partials/_logged-in-side-nav %>
-      <div class="all-maps">
-        <% for(map of maps){ %>
-          <div class="card">
-              <img src="<%= map.img %>" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
-                <p class="card-text"><%= map.title %></p>
-                <a href="/maps/<%= map.id %>" class="btn btn-primary">Go</a>
-                <form method="POST" action="/favorites/<%= map.fav_id %>">
-                  <button type="submit" class="btn btn-danger">Remove Favorite</button>
-                </form>
-              </div>
-            </div>
-            <div class="dropdown-divider"></div>
-        <% } %>
+    <% include ./partials/_logged-in-side-nav %>
+    <div class="all-maps">
+      <% for(map of maps){ %>
+      <div class="card">
+        <img src="<%= map.img %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
+          <p class="card-text"><%= map.title %></p>
+
+          <div class="go-and-fav">
+            <button class="btn btn-outline-primary">
+              <a href="/maps/<%= map.id %>">Go</a>
+            </button>
+            <form method="POST" action="/favorites/<%= map.fav_id %>">
+              <button type="submit" class="btn btn-outline-danger">Remove Favorite</button>
+            </form>
+          </div>
+
+
+        </div>
       </div>
+      <div class="dropdown-divider"></div>
+      <% } %>
+    </div>
   </div>
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -57,4 +64,3 @@
 </body>
 
 </html>
-
