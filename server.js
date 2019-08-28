@@ -57,7 +57,8 @@ app.get("/maps/create", (req, res) => {
 app.get("/maps/:id", (req, res) => {
   templateVars = {
     id: req.params.id,
-    user: req.session.userEmail
+    user: req.session.userEmail,
+    userid: req.session.id
   }
   res.render("maps_show", templateVars);
 });
@@ -389,7 +390,9 @@ app.post("/maps/:id", (req, res) => {
     const description = req.body.description;
     const img = req.body.img;
     const address = req.body.address;
+    const userid = req.body.userid;
 
+    console.log("USER!", userid);
     opencage.geocode({ q: address }, '6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
       // console.log(JSON.stringify(data));
       if (data.status.code == 200) {
@@ -399,8 +402,8 @@ app.post("/maps/:id", (req, res) => {
           const lat = place.geometry.lat;
           const long = place.geometry.lng;
 
-          db.query(`INSERT INTO markers (lat, long, title, description, img, address, map_id)
-         VALUES (${lat}, ${long}, '${title}', '${description}', '${img}', '${address}', ${map_id})
+          db.query(`INSERT INTO markers (lat, long, title, description, img, address, map_id, user_id)
+         VALUES (${lat}, ${long}, '${title}', '${description}', '${img}', '${address}', ${map_id}, ${userid})
          RETURNING *;`)
             .then(data => {
 
