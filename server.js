@@ -11,6 +11,7 @@ const app = express();
 const bcrypt = require('bcrypt');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
+const opencage = require('opencage-api-client');
 
 app.use(cookieSession({
   name: 'session',
