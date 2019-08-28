@@ -1,32 +1,33 @@
-<nav>
-  <!-- <a class="navbar-brand" href="/"> -->
-  <div class="header-all-maps">
-    <a href="/">
-      <h2><i class="fas fa-map-marked-alt"></i> MaPs</h2>
-    </a>
-    <div>
-      <a href="/maps">
-        <h3 class="badge badge-primary">Go to all maps</h3>
-      </a>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="/">
+    <h2><i class="fas fa-map-marked-alt"></i> MaPs</h2>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/maps"><strong>All maps</strong><span class="sr-only">(current)</span></a>
+      </li>
 
-
-
-  <div class=credentials>
+    </ul>
     <% if (user) { %>
     <form class="form-inline" action="/logout" method="POST">
       <h5><%= user %> </h5>
-      <button type="submit" class="btn btn-primary">Logout</button>
+      <button type="submit" class="btn btn-outline-danger">Logout</button>
     </form>
     <% } else { %>
-
-    <a class="nav-item nav-link" href="/register"><button type="submit" class="btn btn-primary">Register</button></a>
-
-    <a class="nav-item nav-link" href="/login"><button type="submit" class="btn btn-primary">Sign In
-
-      </button></a>
+    <span>
+      <li class="btn btn-outline-primary">
+        <a href="/login">Sign In</a>
+      </li>
+      <li class="btn btn-outline-primary">
+        <a href="/register">Register</a>
+      </li>
+    </span>
     <% } %>
   </div>
 </nav>
