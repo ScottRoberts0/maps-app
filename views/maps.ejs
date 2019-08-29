@@ -37,15 +37,15 @@
       <div class="all-maps">
         <% for(map of maps){ %>
           <div class="card">
-              <img src="<%= map.img %>" class="card-img-top" alt="...">
+              <a href="/maps/<%= map.id %>"><img src="<%= map.img %>" class="card-img-top" alt="..."></a>
               <div class="card-body">
-                <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
+                <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong>       <button class="btn btn-link fav-btn" type="submit">
+                    <input type="hidden" class="userid" name="userid" value=<%= userid %>>
+                    <input type="hidden" class="mapid" name="userid" value=<%= map.id %>>
+                    <i class="fas fa-heart fa-2x"></i>
+              </button></h5>
                 <% if (user) { %>
-                  <button class="btn btn-link fav-btn" type="submit">
-                      <input type="hidden" class="userid" name="userid" value=<%= userid %>>
-                      <input type="hidden" class="mapid" name="userid" value=<%= map.id %>>
-                      <div class="heart"></div>
-                </button>
+
                 <% } %>
                 <p class="card-text"><%= map.title %></p>
                 <a href="/maps/<%= map.id %>" class="btn btn-primary">Go</a>

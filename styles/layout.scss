@@ -1,5 +1,7 @@
 // See: https://sass-lang.com/
-
+html{
+  height: 100%;
+}
 body {
 
   .index{
@@ -118,11 +120,11 @@ div.go-and-fav {
 }
 .card-body {
   .heart{
-    width: 15%;
-    height: 23%;
 
-  // left: 97%;
-  // top: 76%;
+    left: 93%;
+    bottom: 5px;
+
+    float:right;
   }
 
 }
@@ -152,6 +154,12 @@ div.go-and-fav {
   100% {
     background-position: -2800px 0;
   }
+}
+.fa-heart{
+  color:red;
+}
+.fa-heart:hover{
+  color:grey
 }
 };
 

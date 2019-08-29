@@ -16,7 +16,7 @@ $(() => {
 
       $("<div>").attr({'id': 'map' + map.id, 'class': "border border-dark"}).css({ "width": "70vw", "height": "70vh" }).appendTo($(".map-body"));
 
-      $("<h1>").text(`${map.title}`).appendTo($(".map-title"))
+      $("<h1>").html(`${map.title} - <em>${map.city}</em>`).appendTo($(".map-title"))
 
       $("<ul>").appendTo($("body"));
       $("<ul>").append(`<li>`)
