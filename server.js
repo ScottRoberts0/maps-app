@@ -292,7 +292,7 @@ app.post("/login", (req, res) => {
   checkPassword(email, password)
     .then(user => {
       if (!user) {
-        res.redirect("/register");
+        res.redirect("/");
         return;
       }
       else {
