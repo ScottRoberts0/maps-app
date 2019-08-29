@@ -10,9 +10,16 @@ body {
           width:100%;
         }
       }
+      div.go-and-delete {
+        display: inline-flex;
+        form {
+          padding-left: 4px;
+        }
+      }
       button {
-        height: fit-content;
-        margin-left: 60px;
+        // height: fit-content;
+        // margin-left: 10%;
+        // margin-top: 10%;
       }
     }
     h5 {
@@ -37,13 +44,13 @@ body {
     width:100%;
     display: flex;
     justify-content: space-between;
-    height: 91.5vh;
+    height: 89vh;
     overflow-y: auto;
   #carouselExampleControls {
     width:70%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2%;
+    margin-top: 5%;
   }
     .carousel-caption {
       padding: 0;
@@ -92,15 +99,13 @@ div.go-and-fav {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: auto;
-    margin-top: inherit;
+    margin-top: 5%;
   }
-}
-.map-markers-container {
-
 }
 }
 @media (max-width: 370px) {
-  div.flex { flex-direction: column }
+  div.flex { flex-direction: column;
+  height: 96vh; }
   div.looged-in-side-bar {
     width: 75%;
     margin: 0;
@@ -109,9 +114,11 @@ div.go-and-fav {
 }
 .card-body {
   .heart{
+    width: 15%;
+    height: 23%;
 
-  left: 97%;
-  top: 76%;
+  // left: 97%;
+  // top: 76%;
   }
 
 }
@@ -121,8 +128,8 @@ div.go-and-fav {
   width: 100px;
   height: 100px;
   position: absolute;
-  left: 50%;
-  top: 80%;
+  // left: 50%;
+  // top: 80%;
   transform: translate(0%, -61%);
   background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
   background-position: 0 0;

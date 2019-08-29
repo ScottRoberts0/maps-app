@@ -1,5 +1,17 @@
 header {
 
+  div.navbar-collapse {
+    color: aliceblue;
+  }
+  a {
+    margin: 2px;
+    color: aliceblue;
+  }
+
+  button {
+    margin: 5px;
+  }
+
   position: sticky;
   nav h5 {
     color: aliceblue;
@@ -8,22 +20,20 @@ header {
     color: aliceblue;
   }
 
-  strong {
-    color: aliceblue;
+  strong.username-big {
+    padding-right: 15px;
     }
+    strong {
+      color: aliceblue;
+      // padding-right: 15px;
+      }
 
   nav select {
     display: none;
   }
-
-
-  // background-color: rgb(140, 151, 170);
-  // height: 70px;
   width: 100%;
-  // position: fixed;
   z-index: 1010;
   top:0;
-  // padding-left: 5px;
 
 div.header-all-maps {
   display: inline-flex;
@@ -52,9 +62,7 @@ div.header-all-maps {
         display: inline-flex;
       align-items: center;
       }
-      @media (max-width: 960px) {
-         display: none;
-      }
+
     }
       h5 {
         padding-top: 10px;
@@ -65,6 +73,35 @@ div.header-all-maps {
     height: 40px;
     width: 85px;
       }
+
+
+      @media (max-width: 990px) {
+        div.navbar-collapse {
+          span a {
+            width: -webkit-fill-available;
+          }
+
+        }
+        display: none;
+        strong.username-big {
+         display: none;
+
+       }
+     }
+
+     @media (min-width: 990px) {
+      strong.username-small {
+        display: none;
+
+
+      }
+  }
+
+  #logout > .btn {
+    width: 100%;
+    display: block;
+    margin: auto;
+  }
 }
 
 

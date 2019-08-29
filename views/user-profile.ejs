@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
+​
 <head>
   <title>Sign In</title>
-
+​
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-
+​
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -18,39 +18,38 @@
   <!-- font awesome-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.1/css/all.css"
     integrity="sha384-wxqG4glGB3nlqX0bi23nmgwCSjWIW13BdLUEYC4VIMehfbcro/ATkyDsF/AbIOVe" crossorigin="anonymous">
-
+​
 </head>
-
+​
 <body>
   <header class="border border-dark">
     <% include ./partials/_header %>
   </header>
   <div class="card" style="width: 25rem;">
-      <% include ./partials/_user-register-sign-in %>
     <div class="card-body">
       <div>
       <h3 class="card-title">Profile <strong><i class="far fa-user"></i></strong></h3>
     </div>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><strong>Username:</strong>> "map.user.id"</li>
-      <li class="list-group-item"><strong>Email address:</strong>> "map.user.email"</li>
 
+      <li class="list-group-item"><strong>User:</strong> <%= user %></li>
+​
       <li class="list-group-item"><strong>Favourite maps:</strong>
-        <% for(map of maps){ %>
+        <% for(map of favmaps){ %>
           <div>
-        <a href="/maps/<%= map.idForSingleUser %>" class="btn btn-primary"></a>DescriptionFor-map.idForSingleUser
+        <a href="/maps/<%= map.id %>" ><%= map.title %> - <%= map.city %></a>
         <% } %>
       </div>
       </li>
       <li class="list-group-item"><strong>Contributed to:</strong>
-        <% for(map of maps){ %>
+        <% for(map of contmaps){ %>
           <div>
-        <a href="/maps/<%= map.idForContributedMaps %>"class="btn btn-primary"></a>DescriptionFor-map.idForidForContributedMaps
+        <a href="/maps/<%= map.id%>"><%= map.title %> - <%= map.city %></a>
         <% } %>
       </div>
       </li>
-
+​
     </ul>
   </div>
   <!-- Bootstrap JS -->
@@ -58,5 +57,5 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 </body>
-
+​
 </html>
