@@ -85,11 +85,20 @@ div.go-and-fav {
     display: flex;
   }
 }
+.card-body {
+  .heart{
+
+  left: 97%;
+  top: 76%;
+  }
+
+}
 
 .heart {
+
   width: 100px;
   height: 100px;
-  display: absolute;
+  position: absolute;
   left: 50%;
   top: 80%;
   transform: translate(-50%, -50%);
@@ -98,6 +107,7 @@ div.go-and-fav {
   cursor: pointer;
   animation: fave-heart 1s steps(28);
 }
+
 .heart:hover {
   background-position: -2800px 0;
   transition: background 1s steps(28);
