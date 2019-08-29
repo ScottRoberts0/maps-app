@@ -63,6 +63,77 @@ app.get("/maps/:id", (req, res) => {
   res.render("maps_show", templateVars);
 });
 
+
+const getUserById = function (id) {
+  return db.query(`SELECT * FROM users WHERE id = $1;`, [id])
+    .then(data => {
+      if (data.rows[0]) {
+        return data.rows[0];
+      } else {
+        return null;
+      }
+    })
+}
+
+const getFavoriteMapsByUserId = function (id) {
+  return db.query(`
+    SELECT * FROM maps
+    JOIN markers ON maps.id = markers.map_id
+    WHERE markers.user_id = $1`, [id])
+    .then(data => {
+      return data.rows;
+    })
+}
+
+const getAllMapsContributedToByUserId = function (id) {
+  return db.query(`
+   SELECT DISTINCT maps.id, maps.title, maps.city
+   FROM maps
+   JOIN markers ON maps.id = markers.map_id
+   WHERE markers.user_id = $1;`, [id])
+    .then(data => {
+      if (data.rows) {
+        return data.rows;
+      } else {
+        return null;
+      }
+
+    })
+}
+
+
+app.get("/users/:id", (req, res) => {
+  const id = req.params.id;
+
+  getUserById(id)
+    .then(user => {
+      if (!user) {
+        res.redirect("/");
+      } else {
+        const userInfo = user;
+
+        getFavoriteMapsByUserId(id)
+          .then(favMaps => {
+            const favoriteMaps = favMaps;
+            getAllMapsContributedToByUserId(id)
+              .then(contMaps => {
+                const contributedMaps = contMaps;
+
+                templateVars = {
+
+                  user: userInfo.email,
+                  userid: req.session.id,
+                  favmaps: favoriteMaps,
+                  contmaps: contributedMaps
+                }
+
+                res.render("user-profile", templateVars);
+              })
+          })
+      }
+    })
+})
+
 app.get("/mymaps", (req, res) => {
   const id = req.session.id;
   db.query(`SELECT * FROM maps WHERE user_id = $1;`, [id])
@@ -127,16 +198,16 @@ app.post("/favorite", (req, res) => {
     })
 })
 
-app.post("/favorites/:id", (req, res) =>  {
+app.post("/favorites/:id", (req, res) => {
   const id = req.params.id;
 
   db.query(`
    DELETE FROM favorites
    WHERE id = $1;`,
-  [id])
-  .then(data => {
-    res.redirect("/favorites")
-  })
+    [id])
+    .then(data => {
+      res.redirect("/favorites")
+    })
 
 });
 
@@ -148,7 +219,7 @@ app.get("/favorites", (req, res) => {
   FROM maps
   JOIN favorites ON maps.id = favorites.map_id
   WHERE favorites.user_id = $1;`,
-  [id])
+    [id])
     .then(data => {
       maps = data.rows;
       db.query(`SELECT * FROM markers;`)
@@ -326,7 +397,6 @@ app.get("/", (req, res) => {
                 map.markers.push(marker);
               }
             }
-
           }
 
           templateVars = {
@@ -453,10 +523,10 @@ app.post("/maps/:id/delete", (req, res) => {
   db.query(`
    DELETE FROM maps
    WHERE id = $1;`,
-  [id])
-  .then(data => {
-    res.redirect("/mymaps")
-  })
+    [id])
+    .then(data => {
+      res.redirect("/mymaps")
+    })
 })
 
 

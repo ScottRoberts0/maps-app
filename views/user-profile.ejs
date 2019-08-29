@@ -32,20 +32,20 @@
     </div>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><strong>Username:</strong>> "map.user.id"</li>
-      <li class="list-group-item"><strong>Email address:</strong>> "map.user.email"</li>
+
+      <li class="list-group-item"><strong>User:</strong> <%= user %></li>
 ​
       <li class="list-group-item"><strong>Favourite maps:</strong>
-        <% for(map of maps){ %>
+        <% for(map of favmaps){ %>
           <div>
-        <a href="/maps/<%= map.idForSingleUser %>" class="btn btn-primary"></a>DescriptionFor-map.idForSingleUser
+        <a href="/maps/<%= map.id %>" ><%= map.title %> - <%= map.city %></a>
         <% } %>
       </div>
       </li>
       <li class="list-group-item"><strong>Contributed to:</strong>
-        <% for(map of maps){ %>
+        <% for(map of contmaps){ %>
           <div>
-        <a href="/maps/<%= map.idForContributedMaps %>"class="btn btn-primary"></a>DescriptionFor-map.idForidForContributedMaps
+        <a href="/maps/<%= map.id%>"><%= map.title %> - <%= map.city %></a>
         <% } %>
       </div>
       </li>
