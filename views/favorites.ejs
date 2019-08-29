@@ -30,6 +30,10 @@
       <% include ./partials/_user-register-sign-in %>
     <% include ./partials/_logged-in-side-nav %>
     <div class="all-maps">
+      <% if(maps.length <= 0){ %>
+        <h1 style="text-align: center">No Favorite Maps Added</h1>
+
+     <% } %>
       <% for(map of maps){ %>
       <div class="card">
         <img src="<%= map.img %>" class="card-img-top" alt="...">

@@ -32,6 +32,7 @@
       <div id="id" style="display: none"><%= id %></div>
     </div>
     <div class="map-markers-container">
+      <div class="map-title"></div>
       <div class="map-body"></div>
 
 
@@ -40,25 +41,31 @@
         <% } %>
 
         <input type="text" id="userid" form="my_form" name="userid" value='<%= userid %>' hidden></td>
-
       <table class="table">
         <thead>
+          <% if(user) { %>
           <tr>
             <th scope="col">Title</th>
             <th scope="col">Description</th>
-            <th scope="col">Address</th>
+            <th id="addressheader" scope="col">Address</th>
             <th scope="col">Img</th>
             <th scope="col"></th>
           </tr>
+          <% } %>
         </thead>
         <tbody>
+          <% if(user) { %>
           <tr>
-            <td> <input type="text" form="my_form" class="form-control" name="title" placeholder="Marker Name"></td>
-            <td><input type="text" form="my_form" class="form-control" name="description" placeholder="Description"></td>
-            <td> <input type="text" form="my_form" class="form-control" name="address" placeholder="Address"></td>
-            <td> <input type="text" form="my_form" class="form-control" name="img" placeholder="ImgURL"></td>
+            <td> <input type="text" form="my_form" class="form-control" name="title" placeholder="Marker Name" required></td>
+            <td><input type="text" form="my_form" class="form-control" name="description" placeholder="Description" required></td>
+            <td> <input id="address" type="text" form="my_form" class="form-control" name="address" placeholder="Address">
+              <input id="lat" type="text" form="my_form" class="form-control" name="lat">
+              <input id="long" type="text" form="my_form" class="form-control" name="long">
+            </td>
+            <td> <input type="text" form="my_form" class="form-control" name="img" placeholder="ImgURL" required></td>
             <td><button type="submit" form="my_form" id="addpin" class="btn btn-success">Pin</button></td>
           </tr>
+          <% } %>
           <tr>
               <th scope="col">Title</th>
               <th scope="col">Description</th>

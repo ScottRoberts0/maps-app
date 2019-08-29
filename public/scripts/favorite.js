@@ -3,7 +3,10 @@ $(() => {
   $('.fav-btn').click(function() {
    const mapid = $(this).children('.mapid').val()
    const userid = $('.userid').val()
-  $.ajax({
+
+
+
+   $.ajax({
       url: "/favorite",
       type: "POST",
       data: { mapid, userid },

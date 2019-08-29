@@ -1,7 +1,12 @@
 // See: https://sass-lang.com/
 
 body {
+
+  .index{
+    height: 91.5vh;
+  }
   div.card {
+
     div.card-body {
       div.card-title {
         width:100%;
@@ -37,7 +42,7 @@ body {
     width:100%;
     display: flex;
     justify-content: space-between;
-    height: 91.5vh;
+
     overflow-y: auto;
   #carouselExampleControls {
     width:70%;
@@ -110,7 +115,9 @@ div.go-and-fav {
 .card-body {
   .heart{
 
-  left: 97%;
+
+  right: 0;
+
   top: 76%;
   }
 
@@ -122,8 +129,8 @@ div.go-and-fav {
   height: 100px;
   position: absolute;
   left: 50%;
-  top: 80%;
-  transform: translate(0%, -61%);
+  top: 83%;
+  transform: translate(-50%, -50%);
   background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
   background-position: 0 0;
   cursor: pointer;

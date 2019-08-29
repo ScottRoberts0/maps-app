@@ -157,6 +157,7 @@ app.get("/mymaps", (req, res) => {
             maps: maps,
             user: req.session.userEmail
           }
+
           res.render("mymaps", templateVars);
         })
     })
@@ -454,7 +455,6 @@ app.post("/maps/create", (req, res) => {
 
 app.post("/maps/:id", (req, res) => {
 
-  if (req.body.title) {
     const map_id = req.params.id;
     const title = req.body.title;
     const description = req.body.description;
@@ -462,16 +462,29 @@ app.post("/maps/:id", (req, res) => {
     const address = req.body.address;
     const userid = req.body.userid;
 
-    console.log("USER!", userid);
-    opencage.geocode({ q: address }, '6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
+
+
+    console.log(req.body.lat)
+    console.log(req.body.long)
+
+  if(req.body.lat && req.body.long){
+    let latlong = `${req.body.lat}, ${req.body.long}`;
+    console.log(latlong)
+
+
+
+    opencage.geocode({ q: latlong }, '6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
       // console.log(JSON.stringify(data));
       if (data.status.code == 200) {
         if (data.results.length > 0) {
           var place = data.results[0];
-          console.log("IM IN HERE2")
+          console.log("IM IN HERE2", place)
+          const address = place.formatted;
           const lat = place.geometry.lat;
           const long = place.geometry.lng;
-
+          console.log(address);
+          //console.log("lat", lat)
+         // console.log("long", long)
           db.query(`INSERT INTO markers (lat, long, title, description, img, address, map_id, user_id)
          VALUES (${lat}, ${long}, '${title}', '${description}', '${img}', '${address}', ${map_id}, ${userid})
          RETURNING *;`)
@@ -481,6 +494,9 @@ app.post("/maps/:id", (req, res) => {
               res.redirect(redirectUrl);
             })
 
+        }else{
+          console.log("query empty")
+          res.redirect("/")
         }
       } else if (data.status.code == 402) {
         console.log('hit free-trial daily limit');
@@ -490,31 +506,78 @@ app.post("/maps/:id", (req, res) => {
         // other possible response codes:
         // https://opencagedata.com/api#codes
         console.log('error', data.status.message);
-        res.send("ERROR1")
+        res.redirect("/")
       }
     })
       .catch(error => {
         console.log('error', error.message);
-        res.send("ERROR1")
-      })
-  } else {
-
-
-
-
-
-    const markerID = req.body.marker_id;
-    const mapID = req.body.map_id;
-    db.query(`DELETE FROM markers WHERE id = ${markerID}`)
-      .then(data => {
-        const redirectUrl = "/maps/" + mapID;
-        res.redirect(redirectUrl);
+        res.redirect("/")
       })
 
+  }else{
 
 
-  }
 
+
+    opencage.geocode({ q: address }, '6d4de6cf56fc4852bef89f1d413e2b29').then(data => {
+      // console.log(JSON.stringify(data));
+      if (data.status.code == 200) {
+        if (data.results.length > 0) {
+          var place = data.results[0];
+          console.log("IM IN HERE1", place)
+          const lat = place.geometry.lat;
+          const long = place.geometry.lng;
+          //console.log("lat", lat)
+         // console.log("long", long)
+          db.query(`INSERT INTO markers (lat, long, title, description, img, address, map_id, user_id)
+         VALUES (${lat}, ${long}, '${title}', '${description}', '${img}', '${address}', ${map_id}, ${userid})
+         RETURNING *;`)
+            .then(data => {
+
+              const redirectUrl = "/maps/" + map_id;
+              res.redirect(redirectUrl);
+            })
+
+        }else{
+          console.log("query empty")
+          res.redirect("/")
+        }
+      } else if (data.status.code == 402) {
+        console.log('hit free-trial daily limit');
+        console.log('become a customer: https://opencagedata.com/pricing');
+
+      } else {
+        // other possible response codes:
+        // https://opencagedata.com/api#codes
+        console.log('error', data.status.message);
+        res.redirect("/")
+      }
+    })
+      .catch(error => {
+        console.log('error', error.message);
+        res.redirect("/")
+      })
+
+
+
+    }
+
+
+
+
+
+
+
+})
+
+app.post("/markers/:id", (req,res) => {
+  const markerID = req.params.id;
+  const mapID = req.body.map_id;
+  db.query(`DELETE FROM markers WHERE id = ${markerID}`)
+    .then(data => {
+      const redirectUrl = "/maps/" + mapID;
+      res.redirect(redirectUrl);
+    })
 })
 
 app.post("/maps/:id/delete", (req, res) => {
