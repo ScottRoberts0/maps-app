@@ -36,7 +36,7 @@
      <% } %>
       <% for(map of maps){ %>
       <div class="card">
-        <img src="<%= map.img %>" class="card-img-top" alt="...">
+          <a href="/maps/<%= map.id %>"> <img src="<%= map.img %>" class="card-img-top" alt="..."></a>
         <div class="card-body">
           <h5 class="card-title"><%= map.city %> <strong><i class="fas fa-city"></i></strong></h5>
           <p class="card-text"><%= map.title %></p>

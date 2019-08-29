@@ -1,8 +1,22 @@
 // See: https://sass-lang.com/
-html{
-  height: 100%;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
 }
 body {
+  div.flex{
+  margin: 0 auto;
+  padding-top: 27px;
+  }
+
+  .profile {
+    margin: auto;
+    margin-top: 50px;
+    height: 78vh;
+  }
 
   .index{
     height: 91.5vh;
@@ -22,11 +36,6 @@ body {
         form {
           padding-left: 4px;
         }
-      }
-      button {
-        // height: fit-content;
-        // margin-left: 10%;
-        // margin-top: 10%;
       }
     }
     h5 {
@@ -52,6 +61,8 @@ body {
     display: flex;
     justify-content: space-between;
     overflow-y: auto;
+   // height: 100vh;
+
   #carouselExampleControls {
     width:70%;
     margin-left: auto;
@@ -91,7 +102,7 @@ div.go-and-fav {
 }
 
 @media (max-width: 991px) {
-  div.flex { flex-direction: column }
+  div.flex { flex-direction: column; }
   div.looged-in-side-bar {
     margin-left: auto;
     margin-right: auto;
@@ -99,6 +110,7 @@ div.go-and-fav {
     display: flex;
   }
   div.flex {
+    height: 100vh;
 
 
   #carouselExampleControls {
@@ -110,8 +122,10 @@ div.go-and-fav {
 }
 }
 @media (max-width: 370px) {
-  div.flex { flex-direction: column;
-  height: 96vh; }
+  div.flex {
+    flex-direction: column;
+//  height: 100vh;
+}
   div.looged-in-side-bar {
     width: 75%;
     margin: 0;
