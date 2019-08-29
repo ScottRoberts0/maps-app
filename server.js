@@ -364,7 +364,7 @@ app.post("/login", (req, res) => {
   checkPassword(email, password)
     .then(user => {
       if (!user) {
-        res.redirect("/r");
+        res.redirect("/");
         return;
       }
       else {
