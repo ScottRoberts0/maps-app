@@ -247,7 +247,7 @@ app.get("/favorites", (req, res) => {
 })
 
 app.get("/maps", (req, res) => {
-  db.query(`SELECT * FROM maps;`)
+  db.query(`SELECT maps.*, users.email AS email FROM maps JOIN users ON maps.user_id = users.id;`)
     .then(data => {
       maps = data.rows;
       db.query(`SELECT * FROM markers;`)
