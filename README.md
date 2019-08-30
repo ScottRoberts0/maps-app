@@ -37,7 +37,6 @@ Responsive to small screens and phones.
 - body-parser
 - cookie-session
 - dotenv
-- geocoder
 - opencage-api-client
 - PG 6.x
 

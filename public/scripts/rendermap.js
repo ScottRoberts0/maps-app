@@ -105,6 +105,7 @@ $(() => {
         const lat = Number(e.latlng.lat.toFixed(6));
         const long = Number(e.latlng.lng.toFixed(6));
 
+        $(".user-input").css({ "border": "1px solid green", "border-radius": "7px", "box-shadow": "0 0 10px green" });
         $("#lat").attr('readonly','readonly');
         $("#long").attr('readonly','readonly');
         $("#addressheader").text("Latitude, Longitude");

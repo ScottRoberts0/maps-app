@@ -56,13 +56,13 @@
         <tbody>
           <% if(user) { %>
           <tr>
-            <td> <input type="text" form="my_form" class="form-control" name="title" placeholder="Marker Name" required></td>
-            <td><input type="text" form="my_form" class="form-control" name="description" placeholder="Description" required></td>
-            <td> <input id="address" type="text" form="my_form" class="form-control" name="address" placeholder="Address">
+            <td> <input type="text" form="my_form" class="form-control user-input" name="title" placeholder="Marker Name" required autocomplete="off"></td>
+            <td><input type="text" form="my_form" class="form-control user-input" name="description" placeholder="Description" required autocomplete="off"></td>
+            <td> <input id="address" type="text" form="my_form" class="form-control" name="address" placeholder="Address" autocomplete="off">
               <input id="lat" type="text" form="my_form" class="form-control" name="lat">
               <input id="long" type="text" form="my_form" class="form-control" name="long">
             </td>
-            <td> <input type="text" form="my_form" class="form-control" name="img" placeholder="ImgURL" required></td>
+            <td> <input type="text" form="my_form" class="form-control user-input" name="img" placeholder="ImgURL" required></td>
             <td><button type="submit" form="my_form" id="addpin" class="btn btn-success">Pin</button></td>
           </tr>
           <% } %>
