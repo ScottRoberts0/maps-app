@@ -24,6 +24,7 @@ Show Map Page and add new pin.
 - - -
 
 ![Image description](https://github.com/ScottRoberts0/maps-app/blob/master/docs/img%205.png)
+
 Responsive to small screens and phones.
 - - -
 
