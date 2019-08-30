@@ -8,14 +8,19 @@ A web app that allows users to collaboratively create maps which list multiple "
 ## Final Product
 
 ![Image description](https://github.com/ScottRoberts0/maps-app/blob/master/docs/img%201.png)
+Home Page.
 
 ![Image description](https://github.com/ScottRoberts0/maps-app/blob/master/docs/img%202.png)
+All Maps Page.
 
 ![Image description](https://github.com/ScottRoberts0/maps-app/blob/master/docs/img%203.png)
+Create Map Page.
 
 ![Image description](https://github.com/ScottRoberts0/maps-app/blob/master/docs/img%204.png)
+Show Map Page and add new pin.
 
 ![Image description](https://github.com/ScottRoberts0/maps-app/blob/master/docs/img%205.png)
+Responsive to small screens and phones.
 
 
 ## Dependencies
